@@ -41,6 +41,8 @@ public class EnemyAI : MonoBehaviour {
 	private Vector3[] standardMovementTargets;
 	private Animator enemyAnimator;
 
+	private AudioSource spottedSound;
+
 	private Vector3 currentTargetPosition;
 	private float chasingTime;
 
@@ -118,6 +120,7 @@ public class EnemyAI : MonoBehaviour {
 
 		agent = GetComponent <NavMeshAgent> ();
 		enemyAnimator = GetComponentInParent <Animator> ();
+		spottedSound = GetComponent <AudioSource> ();
 
 		setNewDestinationOnNormalPath ();
 	}
@@ -188,6 +191,8 @@ public class EnemyAI : MonoBehaviour {
 			onDetection = true;
 			agent.speed = agentChasingSpeed;
 			alreadyReachedTarget = false;
+			spottedSound.Play ();
+			BGMHandlerScript.chageToPursuit ();
 			print ("Detected!!! ");	
 		}
 
@@ -284,6 +289,7 @@ public class EnemyAI : MonoBehaviour {
 				onDetection = false;
 				agent.speed = agentWalkingSpeed;
 				hasDetectedOrSuspected = false;
+				BGMHandlerScript.changeToNormal ();
 			}
 		}
 

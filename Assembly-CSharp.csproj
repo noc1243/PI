@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{6F9C5472-C337-9D44-3290-FD07BDFDD13D}</ProjectGuid>
+    <ProjectGuid>{D3B1486E-AF91-D705-1719-4A6ADE093760}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\GUI\MainMenu\TitleScreenButtonScript.cs" />
      <Compile Include="Assets\Scripts\GeneralUsage\Events\SoundGameEvent.cs" />
      <Compile Include="Assets\Scripts\GeneralUsage\FrameConverter\FrameConverter.cs" />
+     <Compile Include="Assets\Scripts\Sounds\BGM\BGMHandlerScript.cs" />
      <Compile Include="Assets\Scripts\TypeDefinitions\EnemyIsMovable.cs" />
      <Compile Include="Assets\Scripts\TypeDefinitions\IsMovable.cs" />
      <Compile Include="Assets\Scripts\TypeDefinitions\MovementReadings.cs" />
@@ -94,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{BDAEB674-A119-49A4-C056-2730A64A3DB8}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{3CDA771B-B6A1-E9D4-AC85-2845CA7B6EC3}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

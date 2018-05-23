@@ -1,9 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Sounds\BGM\BGMHandlerScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Characters\Player\KnockSoundScript.cs">
     <Files>
-      <File FileName="Assets\Scripts\Characters\Enemies\General\EnemyAI.cs" Line="294" Column="40" />
+      <File FileName="Assets\Scripts\Characters\Enemies\General\EnemyAI.cs" Line="292" Column="40" />
       <File FileName="Assets\Scripts\Sounds\BGM\BGMHandlerScript.cs" Line="52" Column="4" />
+      <File FileName="Assets\Scripts\Characters\Player\KnockSoundScript.cs" Line="33" Column="3" />
+      <File FileName="Assets\Scripts\Characters\Player\LightControl.cs" Line="17" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
