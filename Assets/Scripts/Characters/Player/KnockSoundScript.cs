@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class KnockSoundScript : MonoBehaviour {
 
+	[SerializeField] private int threshold = 50;
 	[SerializeField] private float soundIntensity = 50.0f;
 
 	private AudioSource knockSound;
@@ -20,10 +21,21 @@ public class KnockSoundScript : MonoBehaviour {
 
 	void makeSound ()
 	{
-		if (Input.GetButtonDown ("Fire2") && !knockSound.isPlaying)
+		if (!SerialComReader.isInSerial)
 		{
-			SoundGameEvent.OnHearSoundMethod (soundIntensity);
-			knockSound.Play ();
+			if (Input.GetButtonDown ("Fire2") && !knockSound.isPlaying)
+			{
+				SoundGameEvent.OnHearSoundMethod (soundIntensity);
+				knockSound.Play ();
+			}
+		}
+		else
+		{
+			if (SERIAL_ARDUINO_.SerialCom.previousData [1] > threshold)
+			{
+				SoundGameEvent.OnHearSoundMethod ((float) SERIAL_ARDUINO_.SerialCom.previousData [1]);
+				knockSound.Play ();
+			}
 		}
 	}
 

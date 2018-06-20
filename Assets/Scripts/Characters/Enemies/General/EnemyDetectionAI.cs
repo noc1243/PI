@@ -13,12 +13,15 @@ public class EnemyDetectionAI : MonoBehaviour {
 	private EnemyAI enemyAI;
 	private float initialLightRange;
 	private float sightDistance;
+	private bool onLight;
+	private float lightRange;
 
 	void initializeParameters ()
 	{
 		enemyAI = GetComponentInParent <EnemyAI> ();
 		initialLightRange = IsMovable.getLightRange ();
 		sightDistance = initialSightDistance;
+		onLight = false;
 	}
 
 	// Use this for initialization
@@ -26,15 +29,39 @@ public class EnemyDetectionAI : MonoBehaviour {
 		initializeParameters ();
 	}
 
+	public void getOnLight (float lightRange)
+	{
+		onLight = true;
+		this.lightRange = lightRange;
+	}
+
+	public void getOffLight ()
+	{
+		onLight = false;
+		forceUpdateSightDistance ();
+	}
+
+	void forceUpdateSightDistance ()
+	{
+		sightDistance = ((IsMovable.getLightRange () - initialLightRange) * sightIncreaseRate) + initialSightDistance;
+
+		if (sightDistance > finalSightDistance)
+			sightDistance = finalSightDistance;
+	}
+
 	void updateSightDistance ()
 	{
 		if (IsMovable.getLightRange () - initialLightRange > 0)
 		{
-			//sightDistance = (Mathf.Log (IsMovable.getLightRange () - initialLightRange, 1000) * sightIncreaseRate) + initialSightDistance;
 			sightDistance = ((IsMovable.getLightRange () - initialLightRange) * sightIncreaseRate) + initialSightDistance;
 
 			if (sightDistance > finalSightDistance)
 				sightDistance = finalSightDistance;
+		}
+
+		if (onLight && sightDistance < lightRange)
+		{
+			sightDistance = lightRange;
 		}
 	}
 

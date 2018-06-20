@@ -15,24 +15,36 @@ public class LightControl : MonoBehaviour {
 
 	void setLightControl ()
 	{
-		if (Input.GetAxisRaw ("LightControl") > 0 && lightIntensity != maximumLight)
+		if (!SerialComReader.isInSerial)
 		{
-			lightIntensity += lightIncreaseSensitivity;
+			if (Input.GetAxisRaw ("LightControl") > 0 && lightIntensity != maximumLight)
+			{
+				lightIntensity += lightIncreaseSensitivity;
 
-			if (lightIntensity > maximumLight)
-				lightIntensity = maximumLight;
+				if (lightIntensity > maximumLight)
+					lightIntensity = maximumLight;
 
-			float lightRange = minimumLightRange + (lightIntensity - minimumLight) * (maximumLightRange - minimumLightRange);
-			lt.range = lightRange;
+				float lightRange = minimumLightRange + (lightIntensity - minimumLight) * (maximumLightRange - minimumLightRange);
+				lt.range = lightRange;
 
-			IsMovable.changeLightRange (lightRange);
+				IsMovable.changeLightRange (lightRange);
+			}
+			if (Input.GetAxisRaw ("LightControl") < 0 && lightIntensity != minimumLight)
+			{
+				lightIntensity -= lightIncreaseSensitivity;
+
+				if (lightIntensity < minimumLight)
+					lightIntensity = minimumLight;
+
+				float lightRange = minimumLightRange + (lightIntensity - minimumLight) * (maximumLightRange - minimumLightRange);
+				lt.range = lightRange;
+
+				IsMovable.changeLightRange (lightRange);
+			}
 		}
-		if (Input.GetAxisRaw ("LightControl") < 0 && lightIntensity != minimumLight)
+		else
 		{
-			lightIntensity -= lightIncreaseSensitivity;
-
-			if (lightIntensity < minimumLight)
-				lightIntensity = minimumLight;
+			lightIntensity = 1.0f + SERIAL_ARDUINO_.SerialCom.previousData [0]/255.0f;
 
 			float lightRange = minimumLightRange + (lightIntensity - minimumLight) * (maximumLightRange - minimumLightRange);
 			lt.range = lightRange;

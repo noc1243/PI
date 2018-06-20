@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.IO.Ports;
+
 public class BGMHandlerScript : MonoBehaviour {
 
 	[Header ("BGM Fade Speed")]
@@ -17,6 +19,8 @@ public class BGMHandlerScript : MonoBehaviour {
 	private static AudioSource bgmAudioSource;
 	private static AudioClip staticNormalBGM;
 	private static AudioClip staticPursuitBGM;
+
+	private SerialPort _serialPort = new SerialPort ();
 
 	void initializeParameters ()
 	{
