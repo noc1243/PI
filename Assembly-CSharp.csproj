@@ -61,10 +61,12 @@
      <Compile Include="Assets\Scripts\GUI\MainMenu\MainMenuButton.cs" />
      <Compile Include="Assets\Scripts\GUI\MainMenu\PauseGame.cs" />
      <Compile Include="Assets\Scripts\GUI\MainMenu\TitleScreenButtonScript.cs" />
+     <Compile Include="Assets\Scripts\GUI\SoundIntensity\SoundGUIScript.cs" />
      <Compile Include="Assets\Scripts\GeneralUsage\Events\SoundGameEvent.cs" />
      <Compile Include="Assets\Scripts\GeneralUsage\FrameConverter\FrameConverter.cs" />
+     <Compile Include="Assets\Scripts\GeneralUsage\InanimateObjects\DetectionLaser\DetectionLaserTrigger.cs" />
      <Compile Include="Assets\Scripts\GeneralUsage\InanimateObjects\Door\SoundLockOpen.cs" />
-     <Compile Include="Assets\Scripts\GeneralUsage\Torch\TorchLightRangeModifier.cs" />
+     <Compile Include="Assets\Scripts\GeneralUsage\InanimateObjects\Torch\TorchLightRangeModifier.cs" />
      <Compile Include="Assets\Scripts\Serial\SerialCom.cs" />
      <Compile Include="Assets\Scripts\Serial\SerialComReader.cs" />
      <Compile Include="Assets\Scripts\Sounds\BGM\BGMHandlerScript.cs" />

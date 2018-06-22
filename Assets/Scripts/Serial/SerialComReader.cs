@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SerialComReader : MonoBehaviour {
 
-	[HideInInspector] public static bool isInSerial = true;
+	public static bool isInSerial = false;
 
 	// Use this for initialization
 	void Start () {
