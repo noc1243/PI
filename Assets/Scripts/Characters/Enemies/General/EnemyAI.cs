@@ -22,6 +22,10 @@ public class EnemyAI : MonoBehaviour {
 	[SerializeField] float textAscendingSpeed = 5.0f;
 	[SerializeField] Color textColor;
 
+	[Header ("Sound Effects")]
+	[SerializeField] private AudioClip spottedSound;
+	[SerializeField] private AudioClip suspectedSound;
+
 	private GUIStyle textStyle;
 	private string suspectedString;
 	private string detectedString;
@@ -41,7 +45,7 @@ public class EnemyAI : MonoBehaviour {
 	private Vector3[] standardMovementTargets;
 	private Animator enemyAnimator;
 
-	private AudioSource spottedSound;
+	private AudioSource eventSound;
 
 	private Vector3 currentTargetPosition;
 	private float chasingTime;
@@ -81,9 +85,31 @@ public class EnemyAI : MonoBehaviour {
 		SoundGameEvent.OnHearSoundEvent += OnHearSoundEvent;
 	}
 
+	void unsetSoundEvents ()
+	{
+		SoundGameEvent.OnHearSoundEvent -= OnHearSoundEvent;
+	}
+
+	void setAlarmEvents ()
+	{
+		AlarmEvent.OnAlarmEvent += receiveAlarm;
+	}
+
+	void unsetAlarmEvents ()
+	{
+		AlarmEvent.OnAlarmEvent -= receiveAlarm;
+	}
+
 	void Awake ()
 	{
 		setSoundEvents ();
+		setAlarmEvents ();
+	}
+
+	void OnDisable ()
+	{
+		unsetSoundEvents ();
+		unsetAlarmEvents ();
 	}
 
 	void setNewDestinationTarget (Vector3 destination)
@@ -120,7 +146,7 @@ public class EnemyAI : MonoBehaviour {
 
 		agent = GetComponent <NavMeshAgent> ();
 		enemyAnimator = GetComponentInParent <Animator> ();
-		spottedSound = GetComponent <AudioSource> ();
+		eventSound = GetComponent <AudioSource> ();
 
 		setNewDestinationOnNormalPath ();
 	}
@@ -174,9 +200,23 @@ public class EnemyAI : MonoBehaviour {
 			showString = suspectedString;
 			hasDetectedOrSuspected = true;
 			onSuspection = true;
+			eventSound.clip = suspectedSound;
+			eventSound.Play ();
 			goToPlayerLocation ();
 			alreadyReachedTarget = false;
 			print ("Suspect!!! ");	
+		}
+	}
+
+	public void receiveAlarm ()
+	{
+		if (!onDetection)
+		{
+			agent.isStopped = true;
+			hasDetectedOrSuspected = true;
+			onDetection = true;
+			agent.speed = agentChasingSpeed;
+			alreadyReachedTarget = false;
 		}
 	}
 
@@ -185,14 +225,12 @@ public class EnemyAI : MonoBehaviour {
 		if (!onDetection)
 		{
 			enemyAnimator.SetBool (animatorIsDetecting, true);
-			agent.isStopped = true;
 			showString = detectedString;
-			hasDetectedOrSuspected = true;
-			onDetection = true;
-			agent.speed = agentChasingSpeed;
-			alreadyReachedTarget = false;
-			spottedSound.Play ();
-			BGMHandlerScript.chageToPursuit ();
+			receiveAlarm ();
+			AlarmEvent.OnAlarmMethod ();
+			eventSound.clip = spottedSound;
+			eventSound.Play ();
+			AlarmHandler.addEnemyOnAlarm (this);
 			print ("Detected!!! ");	
 		}
 
@@ -289,7 +327,7 @@ public class EnemyAI : MonoBehaviour {
 				onDetection = false;
 				agent.speed = agentWalkingSpeed;
 				hasDetectedOrSuspected = false;
-				BGMHandlerScript.changeToNormal ();
+				AlarmHandler.removeEnemyOnAlarm (this);
 			}
 		}
 
@@ -298,7 +336,7 @@ public class EnemyAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		handleEnemyMovement ();
-		lookToMovementDirection ();
+		//lookToMovementDirection ();
 		verifyIfShowingText ();
 		clearDetection ();
 		lookForPlayer ();

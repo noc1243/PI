@@ -64,6 +64,8 @@ public class CharacterControllerScript : MonoBehaviour {
 		dashCoolDownTime = 0;
 
 		movement = new MovementReadings (0.0f, 0.0f);
+
+		//Time.timeScale = 1.0f; If the game starts having problems when reloading the scene, uncomment this line
 	}
 
 	// Use this for initialization

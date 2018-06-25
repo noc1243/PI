@@ -46,8 +46,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Characters\Enemies\General\AlarmHandler.cs" />
      <Compile Include="Assets\Scripts\Characters\Enemies\General\EnemyAI.cs" />
      <Compile Include="Assets\Scripts\Characters\Enemies\General\EnemyDetectionAI.cs" />
+     <Compile Include="Assets\Scripts\Characters\Enemies\General\EnemyGameOver.cs" />
      <Compile Include="Assets\Scripts\Characters\Player\CharacterControllerScript.cs" />
      <Compile Include="Assets\Scripts\Characters\Player\KnockSoundScript.cs" />
      <Compile Include="Assets\Scripts\Characters\Player\LightControl.cs" />
@@ -55,17 +57,25 @@
      <Compile Include="Assets\Scripts\FieldOfView\FogClearScript.cs" />
      <Compile Include="Assets\Scripts\GUI\GameOver\GameOverDetection.cs" />
      <Compile Include="Assets\Scripts\GUI\GameOver\GameOverScript.cs" />
+     <Compile Include="Assets\Scripts\GUI\GameOver\RetryButton.cs" />
      <Compile Include="Assets\Scripts\GUI\LightIntensity\LightIntensityIndicatorScript.cs" />
      <Compile Include="Assets\Scripts\GUI\MainMenu\AutoTurnOffInventoryButtonScript.cs" />
      <Compile Include="Assets\Scripts\GUI\MainMenu\MainMenu.cs" />
      <Compile Include="Assets\Scripts\GUI\MainMenu\MainMenuButton.cs" />
      <Compile Include="Assets\Scripts\GUI\MainMenu\PauseGame.cs" />
      <Compile Include="Assets\Scripts\GUI\MainMenu\TitleScreenButtonScript.cs" />
+     <Compile Include="Assets\Scripts\GUI\PauseMenu\TurnOnPauseMenu.cs" />
      <Compile Include="Assets\Scripts\GUI\SoundIntensity\SoundGUIScript.cs" />
+     <Compile Include="Assets\Scripts\GUI\TitleScreen\BackToTitleScreen.cs" />
+     <Compile Include="Assets\Scripts\GUI\TitleScreen\ExitGame.cs" />
+     <Compile Include="Assets\Scripts\GUI\TitleScreen\StartGame.cs" />
+     <Compile Include="Assets\Scripts\GeneralUsage\Events\AlarmEvent.cs" />
      <Compile Include="Assets\Scripts\GeneralUsage\Events\SoundGameEvent.cs" />
      <Compile Include="Assets\Scripts\GeneralUsage\FrameConverter\FrameConverter.cs" />
      <Compile Include="Assets\Scripts\GeneralUsage\InanimateObjects\DetectionLaser\DetectionLaserTrigger.cs" />
      <Compile Include="Assets\Scripts\GeneralUsage\InanimateObjects\Door\SoundLockOpen.cs" />
+     <Compile Include="Assets\Scripts\GeneralUsage\InanimateObjects\Door\TurnLightOnAndOff.cs" />
+     <Compile Include="Assets\Scripts\GeneralUsage\InanimateObjects\PasswordPlatform\PlayPassword.cs" />
      <Compile Include="Assets\Scripts\GeneralUsage\InanimateObjects\Torch\TorchLightRangeModifier.cs" />
      <Compile Include="Assets\Scripts\Serial\SerialCom.cs" />
      <Compile Include="Assets\Scripts\Serial\SerialComReader.cs" />

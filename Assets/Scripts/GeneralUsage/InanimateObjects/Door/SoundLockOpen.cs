@@ -19,6 +19,8 @@ public class SoundLockOpen : MonoBehaviour {
 	private Animator doorAnimator;
 	private bool isOpen;
 
+	private GameObject lightCue;
+
 	private const float airBetaAttenuationCoefficient = 1.38f;
 
 	private const string animatorIsOpenString = "isOpen";
@@ -29,6 +31,8 @@ public class SoundLockOpen : MonoBehaviour {
 		isOpen = false;
 		previousDetectedTime = 0.0f;
 		doorAnimator = GetComponent <Animator> ();
+
+		lightCue = transform.GetChild (0).gameObject;
 
 		soundBuffers = new float[soundsIntervals.GetLength (0) + 1];
 		soundBufferedIntervals = new float[soundsIntervals.GetLength (0) + 1];
@@ -86,13 +90,14 @@ public class SoundLockOpen : MonoBehaviour {
 
 		for (int index = 1; index < soundBufferedIntervals.GetLength (0); index++)
 		{
-			print (index + ": " + Mathf.Abs (soundBufferedIntervals [index] - soundsIntervals [index - 1]));
+			//print ("Diff: " + index + ": " + Mathf.Abs (soundBufferedIntervals [index] - soundsIntervals [index - 1]));
+			//print (index + ": " + Mathf.Abs (soundBufferedIntervals [index]));
 
 			if (Mathf.Abs (soundBufferedIntervals [index] - soundsIntervals [index - 1]) < leaverage)
 				numberOfCorrectInputs++;
 		}
 			
-		print (numberOfCorrectInputs + "_" + (soundBufferedIntervals.GetLength (0) - 1).ToString ());
+		//print (numberOfCorrectInputs + "_" + (soundBufferedIntervals.GetLength (0) - 1).ToString ());
 		if (numberOfCorrectInputs == soundBufferedIntervals.GetLength (0) - 1)
 			openDoor ();
 	}
@@ -104,11 +109,18 @@ public class SoundLockOpen : MonoBehaviour {
 		clearMethod.Invoke(null,null);
 	}
 
+	void manageLightCue ()
+	{
+		lightCue.SetActive (false);
+		lightCue.SetActive (true);
+	}
+
 	void OnHearSoundEvent (float soundIntensity )
 	{
 		if (verifyIfOnScreen () && Mathf.Abs (previousDetectedTime - Time.time) > minimumTimeDifference)
 		{
-			ClearConsole ();
+			//ClearConsole ();
+			manageLightCue ();
 			previousDetectedTime = Time.time;
 			float distance = Vector3.Distance (transform.position, IsMovable.getPlayerPosition ());
 			float hearingVolumeIntensity = soundIntensity * Mathf.Exp (-airBetaAttenuationCoefficient * distance);
@@ -127,9 +139,19 @@ public class SoundLockOpen : MonoBehaviour {
 		SoundGameEvent.OnHearSoundEvent += OnHearSoundEvent;
 	}
 
+	void unsetSoundEvents ()
+	{
+		SoundGameEvent.OnHearSoundEvent -= OnHearSoundEvent;
+	}
+
 	void Awake ()
 	{
 		setSoundEvents ();
+	}
+
+	void OnDisable ()
+	{
+		unsetSoundEvents ();
 	}
 
 	// Update is called once per frame

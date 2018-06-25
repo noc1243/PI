@@ -26,7 +26,7 @@ public class KnockSoundScript : MonoBehaviour {
 			if (Input.GetButtonDown ("Fire2") && !knockSound.isPlaying)
 			{
 				SoundGameEvent.OnHearSoundMethod (soundIntensity);
-				knockSound.Play ();
+				//knockSound.Play ();
 			}
 		}
 		else
@@ -34,7 +34,7 @@ public class KnockSoundScript : MonoBehaviour {
 			if (SERIAL_ARDUINO_.SerialCom.previousData [1] > threshold)
 			{
 				SoundGameEvent.OnHearSoundMethod ((float) SERIAL_ARDUINO_.SerialCom.previousData [1]);
-				knockSound.Play ();
+				//knockSound.Play ();
 			}
 		}
 	}

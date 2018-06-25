@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DetectionLaserTrigger : MonoBehaviour {
 
+	[SerializeField] private AudioSource alarm;
 	[SerializeField] private float soundIntensity = 100.0f;
 	[SerializeField] private float lightRange = 15.0f;
 
@@ -12,6 +13,7 @@ public class DetectionLaserTrigger : MonoBehaviour {
 	void initializeParameters ()
 	{
 		visualCue = transform.GetChild (0).gameObject;
+		alarm = GetComponent <AudioSource> ();
 	}
 
 	// Use this for initialization
@@ -42,6 +44,8 @@ public class DetectionLaserTrigger : MonoBehaviour {
 		if (other.gameObject.tag == "Player")
 		{
 			SoundGameEvent.OnHearSoundMethod (soundIntensity);
+			if (!alarm.isPlaying)
+				alarm.Play ();
 		}
 	}
 }

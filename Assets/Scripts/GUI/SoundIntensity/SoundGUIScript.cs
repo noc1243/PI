@@ -83,9 +83,19 @@ public class SoundGUIScript : MonoBehaviour {
 		SoundGameEvent.OnHearSoundEvent += OnHearSoundEvent;
 	}
 
+	void unsetSoundEvents ()
+	{
+		SoundGameEvent.OnHearSoundEvent -= OnHearSoundEvent;
+	}
+
 	void Awake ()
 	{
 		setSoundEvents ();
+	}
+
+	void OnDisable ()
+	{
+		unsetSoundEvents ();
 	}
 
 	// Use this for initialization

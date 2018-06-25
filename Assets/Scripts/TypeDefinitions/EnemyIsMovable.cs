@@ -6,6 +6,8 @@ public static class EnemyIsMovable {
 
 	private static bool isPlayerDetected = false;
 
+	private static float chasingTime = 0.0f;
+
 	public static void changteIsPlayerDetected ()
 	{
 		isPlayerDetected = !isPlayerDetected;
@@ -15,4 +17,5 @@ public static class EnemyIsMovable {
 	{
 		return isPlayerDetected;
 	}
+
 }

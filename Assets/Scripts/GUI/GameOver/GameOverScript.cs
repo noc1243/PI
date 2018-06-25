@@ -14,6 +14,11 @@ public class GameOverScript : MonoBehaviour {
 		Time.timeScale = 0.0f;
 	}
 
+	void OnDisable ()
+	{
+		Time.timeScale = 1.0f;
+	}
+
 	// Update is called once per frame
 	void Update () {
 		
